@@ -1,0 +1,6 @@
+.idea
+venv
+StatusObj.json
+config.json
+local tests
+__pycache__
