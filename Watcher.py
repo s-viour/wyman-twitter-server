@@ -8,7 +8,8 @@ class Watcher:
         self.consumer_key = None
         self.consumer_secret = None
         # while the last tweet will be stored in a local file, last_tweet will hold it in memory
-        self.last_tweet = None
+        self.last_tweet = {}
+        self.last_tweet_id = ""
         self.api = None
 
         # load and set config variables
@@ -28,14 +29,14 @@ class Watcher:
         except tweepy.TweepError:
             raise Exception("consumer key or consumer secret is invalid!")
 
-        # yeah i know i'm accessing a protected object, shut it
-        self.last_tweet = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended")[0]._json
-
     # returns True if a new tweet has been posted since the last check
     def check(self):
-        tweet = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended")[0]._json
-        if tweet != self.last_tweet:
-            self.last_tweet = tweet
+        tweet_id = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended")[0]._json["id_str"]
+        print(self.last_tweet_id)
+        print(tweet_id)
+        if tweet_id != self.last_tweet_id:
+            self.last_tweet_id = tweet_id
+            self.last_tweet = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended")[0]._json
             return True
         return False
 

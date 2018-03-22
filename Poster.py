@@ -25,6 +25,7 @@ class Poster:
     def send(self):
         if not self.watcher.check():
             print("watcher check failed")
+            return
 
         text = self.watcher.get("text")
         image = self.watcher.get("image")
