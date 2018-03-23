@@ -5,6 +5,8 @@ import threading
 from Watcher import Watcher
 from Poster import Poster
 
+running_jobs = []
+
 
 def is_valid_user(username):
     try:
@@ -41,7 +43,7 @@ class Server:
 
         with open(self.file_path, "r") as opened:
             try:
-                self.config = json.loads(opened)
+                self.config = json.loads(opened.read())
             except json.JSONDecodeError:
                 print("Invalid configuration file [{}]!", self.file_path)
                 return
@@ -65,11 +67,17 @@ class Server:
             print("check_delay is not a number!\ndefaulting to 10 minute delay.")
 
     def start(self):
+        if self.config in running_jobs:
+            print("job for {} already running. skipping...".format(self.config["twitter_handle"]))
+            return
+
+        running_jobs.append(self.config)
+        print(len(running_jobs))
+
         def run_check():
             while True:
                 self.poster_obj.send()
                 sleep(self.check_delay)
         thread = threading.Thread(target=run_check)
         thread.start()
-        thread.join()
 
