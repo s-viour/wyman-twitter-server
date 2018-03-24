@@ -11,5 +11,5 @@ def do_jobs():
 
 
 while True:
-    sleep(int(json.loads(open("config.json", "r").read())["job_interval"]))
     do_jobs()
+    sleep(int(json.loads(open("config.json", "r").read())["job_interval"]))
