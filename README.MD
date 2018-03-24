@@ -31,6 +31,7 @@ wyman is a simple python server designed to periodically check twitter accounts 
   "webhook": "https://a-webhook-url/",
   "check_delay": "600",
   "text_enabled": "false",
-  "images_enabled": "true"
+  "images_enabled": "true",
+  "links_enabled": "false"
 }
 ```

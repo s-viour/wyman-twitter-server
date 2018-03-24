@@ -3,5 +3,5 @@
   "webhook": "https://a-webhook-url/",
   "check_delay": "600",
   "text_enabled": "false",
-  "images_enabled": "true"
-}
+  "images_enabled": "true",
+  "links_enabled": "false"

@@ -60,6 +60,8 @@ class Server:
             self.poster_obj.disable_text()
         if str(self.config["images_enabled"]).lower() == "false":
             self.poster_obj.disable_images()
+        if str(self.config["links_enabled"]).lower() == "false":
+            self.poster_obj.disable_links()
 
         try:
             self.check_delay = int(self.config["check_delay"])
@@ -72,7 +74,6 @@ class Server:
             return
 
         running_jobs.append(self.config)
-        print(len(running_jobs))
 
         def run_check():
             while True:
