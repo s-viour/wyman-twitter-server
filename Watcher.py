@@ -46,7 +46,7 @@ class Watcher:
         elif what == "date":
             return self.last_tweet["created_at"]
         elif what == "url":
-            return self.last_tweet["entities"]["media"][0]["url"]
+            return self.api.get_status(self.last_tweet["id_str"])
         elif what == "image":
             try:
                 image = self.last_tweet["entities"]["media"][0]["media_url_https"]
