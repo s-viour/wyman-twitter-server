@@ -31,10 +31,10 @@ class Watcher:
 
     # returns True if a new tweet has been posted since the last check
     def check(self):
-        tweet_id = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended")[0]._json["id_str"]
+        tweet_id = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended", exclude_replies=True)[0]._json["id_str"]
         if tweet_id != self.last_tweet_id:
             self.last_tweet_id = tweet_id
-            self.last_tweet = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended")[0]._json
+            self.last_tweet = self.api.user_timeline(id=self.user_name, count=1, tweet_mode="extended", exclude_replies=True)[0]._json
             return True
         return False
 
